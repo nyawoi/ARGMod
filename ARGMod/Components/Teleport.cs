@@ -34,14 +34,14 @@ public class Teleport : MonoBehaviour
                 gameObject.transform.position = SavedPositions[keyCode];
                 gameObject.transform.rotation = SavedRotations[keyCode];
                 
-                ChatManager.DisplayMessage($"LoadState: {keyCode}", ChatManager.ChatColor.Magenta);
+                ARGMod.ActionLog($"LoadState: {keyCode}");
             }
             else
             {
                 SavedPositions[keyCode] = gameObject.transform.position;
                 SavedRotations[keyCode] = gameObject.transform.rotation;
                 
-                ChatManager.DisplayMessage($"SaveState: {keyCode}", ChatManager.ChatColor.Magenta);
+                ARGMod.ActionLog($"SaveState: {keyCode}");
             }
 
             break;

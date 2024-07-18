@@ -29,7 +29,7 @@ public static class sc_playerPatch
     [HarmonyPatch(nameof(sc_player.OnGUI))]
     public static bool ManageUI()
     {
-        return ARGMod.isUIVisible;
+        return HideUI.isVisible;
     }
     
     // [HarmonyTranspiler]

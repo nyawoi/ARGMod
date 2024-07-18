@@ -35,6 +35,8 @@ public class HidePlayerModel : MonoBehaviour
             meshRenderer.enabled = isVisible;
         }
         
+        ARGMod.ActionLog("Toggled hands " + (isVisible ? "on" : "off"));
+        
         // If no item exists, return
         if (Player.handitem == null) return;
         
@@ -55,5 +57,7 @@ public class HidePlayerModel : MonoBehaviour
 
             meshRenderer.enabled = isVisible;
         }
+        
+        ARGMod.ActionLog("Toggled compatible weapon " + (isVisible ? "on" : "off"));
     }
 }

@@ -12,10 +12,14 @@ public static class sc_matchcontrollerPatch
     [HarmonyPatch(nameof(sc_matchcontroller.Start))]
     public static void DisableZumbiSpawn(sc_matchcontroller __instance)
     {
-        // Set the maximum amount of zumbis that can spawn to 0
-        __instance.zsmax = 0;
+        // If zumbis are disabled,
+        if (ARGMod.DisableZumbis.Value)
+        {
+            // set the maximum amount of zumbis that can spawn to 0
+            __instance.zsmax = 0;
+        }
         
-        // Save sc_matchcontroller instance to be able to send messages
+        // Save `sc_matchcontroller` instance to be able to broadcast messages and announcements
         ChatManager.MatchController = __instance;
     }
     
@@ -23,6 +27,13 @@ public static class sc_matchcontrollerPatch
     [HarmonyPatch(nameof(sc_matchcontroller.Update))]
     public static IEnumerable<CodeInstruction> FixWaves(IEnumerable<CodeInstruction> instructions)
     {
+        // If zumbis are not disabled,
+        if (!ARGMod.DisableZumbis.Value)
+        {
+            // do not modify the method
+            return instructions;
+        }
+        
         // Retrieve field and getter for IL CodeInstruction matching
         var zsinsceneField = AccessTools.Field(typeof(sc_matchcontroller), nameof(sc_matchcontroller.zsinscene));
         var arrayLengthGetter = AccessTools.PropertyGetter(typeof(Array), nameof(Array.Length));

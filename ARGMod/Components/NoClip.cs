@@ -26,7 +26,7 @@ public class NoClip : MonoBehaviour
             gameObject.rigidbody.isKinematic = isEnabled;
             gameObject.rigidbody.detectCollisions = !isEnabled;
             
-            ChatManager.DisplayMessage("NoClip " + (isEnabled ? "enabled" : "disabled"), ChatManager.ChatColor.Magenta);
+            ARGMod.ActionLog("NoClip " + (isEnabled ? "enabled" : "disabled"));
         }
         
         if (!isEnabled) return;
